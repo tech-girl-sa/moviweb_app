@@ -33,6 +33,9 @@ class SQLiteDataManager(DataManagerInterface):
     def get_user(self, user_id):
         return self.db.session.query(User).filter(User.id==user_id).one()
 
+    def get_movie(self, movie_id):
+        return self.db.session.query(Movie).filter(Movie.id == movie_id).one()
+
     def add_user(self, user):
         self.db.session.add(user)
         self.db.session.commit()
@@ -40,6 +43,15 @@ class SQLiteDataManager(DataManagerInterface):
     def add_movie(self, movie):
         self.db.session.add(movie)
         self.db.session.commit()
+
+    def update_movie(self, movie_id, update_data):
+        movie = self.db.session.query(Movie).filter(Movie.id==movie_id).one()
+        for key, value in update_data.items():
+            if hasattr(movie, key):
+                setattr(movie, key, value)
+        print(movie)
+        self.db.session.commit()
+
 
     def delete_movie(self, movie_id):
         self.db.session.query(Movie).filter(Movie.id == movie_id).delete()

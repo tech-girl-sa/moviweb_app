@@ -36,7 +36,7 @@
 
                 </div>
               <div class="movie-actions">
-                        <a href="/edit-movie/1" class="edit-button"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="{{url_for('edit_movie', user_id=user.id, movie_id=movie.id)}}" class="edit-button"><i class="fa fa-pencil"></i> Edit</a>
                         <a href="/delete-movie/1" class="delete-button">Delete</a>
               </div>
             </article>

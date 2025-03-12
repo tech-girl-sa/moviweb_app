@@ -42,5 +42,17 @@ def add_user():
         message=f"Welcome {user.name} this is your movies page. Start adding your favorite movies!"
         return redirect(url_for("user_movies", user_id=user.id, message=message))
 
+
+@app.route('/users/<user_id>/update_movie/<movie_id>', methods=["GET","POST"])
+def edit_movie(user_id, movie_id):
+    movie = data_manager.get_movie(movie_id)
+    if request.method == "GET":
+        return render_template('edit_movie.html', movie=movie)
+    else:
+        data = dict(request.form)
+        data_manager.update_movie(movie_id, data)
+        message=f"Movie {movie.name} successfully updated!"
+        return redirect(url_for("user_movies", user_id=user_id, message=message))
+
 if __name__=="__main__":
     app.run(debug=True)
