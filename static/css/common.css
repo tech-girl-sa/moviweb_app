@@ -12,10 +12,38 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Main Section */
 main {
     padding: 20px;
+}
+
+#message-box {
+    position: relative;
+    top: 0;
+    width: 90%; /* Slightly less than the width of the card */
+    background-color: #4f4f4f; /* Lighter color */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#message-box.success {
+    background-color: #66bb6a;
+}
+
+#message-box.error {
+    background-color: #f44336;
 }
 

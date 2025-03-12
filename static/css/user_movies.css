@@ -81,13 +81,26 @@
 
 /* Edit Button */
 .edit-button {
+    display: inline-flex;
+    align-items: center;
     background-color: #444;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    gap: 10px;
+}
+
+.edit-button .i {
+    color: white;
+    font-size: 1.2rem;
 }
 
 .edit-button:hover {
     background-color: #555;
 }
-
 /* Delete Button */
 .delete-button {
     background-color: #d9534f;
@@ -95,4 +108,40 @@
 
 .delete-button:hover {
     background-color: #c9302c;
+}
+
+.add-movie-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.add-movie-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.add-movie-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-movie-button .icon {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.add-movie-button:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
 }

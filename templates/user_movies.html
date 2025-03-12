@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Movies - MovieWeb App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/common.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/user_movies.css')}}">
 </head>
 <body>
     <header>
         <h1>Favorite Movies of {{user.name}}</h1>
+         <div class="add-movie-container">
+            <a href="/add_movie" class="add-movie-button">
+                <span class="icon">➕</span> Add Movie
+            </a>
+        </div>
     </header>
-
+{% if message %}
+        <div id="message-box" class="success">{{ message }}</div>
+    {% endif %}
     <main>
+
         <section id="movies-list">
             {% for movie in movies %}
             <article class="movie-card">
@@ -27,7 +36,7 @@
 
                 </div>
               <div class="movie-actions">
-                        <a href="/edit-movie/1" class="edit-button">Edit</a>
+                        <a href="/edit-movie/1" class="edit-button"><i class="fa fa-pencil"></i> Edit</a>
                         <a href="/delete-movie/1" class="delete-button">Delete</a>
               </div>
             </article>
