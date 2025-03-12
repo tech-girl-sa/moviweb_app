@@ -30,6 +30,8 @@ class SQLiteDataManager(DataManagerInterface):
     def get_user_movies(self, user_id):
         return self.db.session.query(User).filter(User.id == user_id).one().movies
 
+    def get_user(self, user_id):
+        return self.db.session.query(User).filter(User.id==user_id).one()
 
     def add_user(self, user):
         self.db.session.add(user)
