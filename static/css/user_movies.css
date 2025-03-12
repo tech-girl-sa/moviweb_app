@@ -1,0 +1,98 @@
+/* Movies List */
+#movies-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Movie Card */
+.movie-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.movie-poster img {
+    width: 100%;
+    border-radius: 8px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.movie-details {
+    text-align: center;
+}
+
+.movie-title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    white-space: break-spaces;
+}
+
+.movie-year {
+    font-size: 1.1rem;
+    color: #888;
+}
+
+.movie-director {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #ccc;  /* Light grey for director */
+}
+
+.movie-rating {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+.movie-rating {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+/* Star Rating */
+.star-rating {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+/* Movie Actions */
+.movie-actions {
+    margin-top: 15px;
+}
+
+.movie-actions a {
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Edit Button */
+.edit-button {
+    background-color: #444;
+}
+
+.edit-button:hover {
+    background-color: #555;
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: #d9534f;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
