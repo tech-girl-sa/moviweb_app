@@ -82,6 +82,14 @@ def add_movie(user_id):
         message = f"Movie {movie.name} successfully added!"
         return redirect(url_for("user_movies", user_id=user_id, message=message))
 
+@app.route('/users/<user_id>/delete_movie/<movie_id>', methods=["GET"])
+def delete_movie(user_id, movie_id):
+    movie = data_manager.get_movie(movie_id)
+    movie_name = movie.name
+    data_manager.delete_movie(movie_id)
+    message=f"Movie {movie_name} successfully deleted!"
+    return redirect(url_for("user_movies", user_id=user_id, message=message))
+
 
 if __name__=="__main__":
     app.run(debug=True)
