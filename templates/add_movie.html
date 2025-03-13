@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Movies - MovieWeb App</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/common.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/add_movie.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/edit_movie.css')}}">
+</head>
+<body>
+    <header>
+        <h1>Add movie</h1>
+    </header>
+
+    <main>
+        {% if manual_entry %}
+        <form  method="post" class="movie-form">
+            <label for="name">Movie Title:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="director">Director:</label>
+            <input type="text" id="director" name="director" >
+
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required>
+
+            <label for="rating">Rating (1-10):</label>
+            <input type="number" id="rating" name="rating" min="1" max="10" >
+
+            <label for="poster">Poster URL:</label>
+            <input type="url" id="poster" name="poster">
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" >
+
+            <button type="submit" class="submit-button">Add Movie</button>
+        </form>
+         {% else %}
+        <form method="post" class="movie-form">
+              <label for="name">Movie Title:</label>
+              <input type="text" class="name" name="name" required>
+              <button type="submit" class="submit-button">Add Movie</button>
+        </form>
+
+        {% endif %}
+      <div id="not-found-modal" class="modal {% if not show_modal %}hidden{% endif %}">
+    <div class="modal-content">
+        <p>
+          Movie was not found in ImDB. Please check your spelling of the title.
+          if you are sure and still want to continue with the same title please
+          click on Manual Add button.
+        </p>
+      <div class="modal-actions">
+        <a href="{{url_for('add_movie', user_id=user_id, manual_entry=True)}}" id="manual-add-button" class="manual-add-button">Manual Add</a>
+        <a href="{{url_for('add_movie', user_id=user_id)}}" class="retry-button">
+            <i class="fa fa-redo"></i> Retry
+        </a>
+        </div>
+    </div>
+      </div>
+    </main>
+</body>
+</html>

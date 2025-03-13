@@ -3,7 +3,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 
 from datamanager.data_manager import SQLiteDataManager
-from datamanager.data_models import User
+from datamanager.data_models import User, Movie
+from omdb_api import OMDbApi
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'data', 'movies.sqlite')
@@ -53,6 +54,34 @@ def edit_movie(user_id, movie_id):
         data_manager.update_movie(movie_id, data)
         message=f"Movie {movie.name} successfully updated!"
         return redirect(url_for("user_movies", user_id=user_id, message=message))
+
+
+@app.route('/users/<user_id>/add_movie', methods=["GET","POST"])
+def add_movie(user_id):
+    if request.method == "GET":
+        manual_entry = request.args.get("manual_entry", "").lower() == "true"
+        show_modal = request.args.get("show_modal", "").lower() == "true"
+        if  show_modal:
+            return render_template('add_movie.html', show_modal=True, user_id=user_id,
+                                   manual_entry=manual_entry)
+        else:
+            return render_template('add_movie.html', user_id=user_id, manual_entry=manual_entry)
+    else:
+        data = dict(request.form)
+        if len(data) == 1:
+            title= data["name"]
+            try:
+                movie_data = OMDbApi.get_movie(title)
+                movie = Movie(**movie_data)
+            except:
+                return redirect(url_for("add_movie", user_id=user_id, show_modal=True) )
+        else:
+            movie = Movie(**data)
+        movie.user_id = user_id
+        data_manager.add_movie(movie)
+        message = f"Movie {movie.name} successfully added!"
+        return redirect(url_for("user_movies", user_id=user_id, message=message))
+
 
 if __name__=="__main__":
     app.run(debug=True)

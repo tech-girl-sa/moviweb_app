@@ -27,7 +27,6 @@ class OMDbApi:
                 raise OMDbApiException(response["Error"])
             elif "Title" in response:
                 title =  response["Title"]
-                print(response)
                 rating = cls.get_rating_from_response(response)
                 year = response.get("Year", None)
                 poster = response.get("Poster", "")

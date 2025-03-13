@@ -12,7 +12,7 @@
     <header>
         <h1>Favorite Movies of {{user.name}}</h1>
          <div class="add-movie-container">
-            <a href="/add_movie" class="add-movie-button">
+            <a href="{{url_for('add_movie', user_id=user.id)}}" class="add-movie-button">
                 <span class="icon">➕</span> Add Movie
             </a>
         </div>
@@ -26,7 +26,9 @@
             {% for movie in movies %}
             <article class="movie-card">
                 <div class="movie-poster">
-                    <img src="{{movie.poster}}" alt="Movie Poster">
+                    <img
+                            src="{% if movie.poster %}{{movie.poster}}{% else %}https://placehold.co/400x600?text=Missing+Photo&font=roboto {% endif %}"
+                            alt="Movie Poster">
                 </div>
                 <div class="movie-details">
                     <h2 class="movie-title">{{ movie.name }} <span class="movie-year">({{ movie.year }})</span> </h2>
