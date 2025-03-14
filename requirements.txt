@@ -1,7 +1,8 @@
 flask
-flask
 sqlalchemy
 Flask-SQLAlchemy
 jinja2
 dotenv
 requests
+pycountry
+emoji-country-flag

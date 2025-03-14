@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from outils import get_country_flag_emoji
+
 db: SQLAlchemy = SQLAlchemy()
 
 
@@ -44,4 +46,8 @@ class Movie(db.Model):
         star = "★"
         int_rating = int(self.rating+0.4)
         return f"{int_rating * star}{(10 - int_rating) * empty_star}"
+
+    @property
+    def country_flags(self):
+        return get_country_flag_emoji(self.country)
 
