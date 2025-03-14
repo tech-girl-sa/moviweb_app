@@ -1,0 +1,123 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #222;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #ff9800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.navbar ul li a:hover {
+    color: #ff9800;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: url('cinema-bg.jpg') no-repeat center center/cover;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #b71c1c;
+}
+
+/* Featured Movies */
+.featured {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.featured h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.movie-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.movie-card h4 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.director {
+    color: #bbb;
+}
+
+.rating {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+}

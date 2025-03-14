@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieWeb App - Home</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <h1 class="logo"><i class="fas fa-film"></i> MovieWeb</h1>
+        <ul>
+            <li><a href="{{url_for('list_users')}}"><i class="fas fa-users"></i> Users</a></li>
+            <li><a href="{{url_for('add_movie', user_id=1)}}"><i class="fas fa-plus-circle"></i> Add Movie</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h2>Discover and Share Your Favorite Movies</h2>
+        <p>Join the community and explore the world of cinema.</p>
+        <a href="{{url_for('list_users')}}" class="btn-primary"><i class="fas fa-arrow-right"></i> Get Started</a>
+    </header>
+
+   {% if featured %}
+    <section class="featured">
+        <h3>Featured Movies</h3>
+
+        <div class="movie-grid">
+             {% for movie in featured %}
+            <div class="movie-card">
+                <img src="{{ movie.poster }}" alt="Movie Poster">
+                <h4>{{ movie.name }} </h4>
+                <p>Director: <span class="director">{{ movie.director }} </span></p>
+                <p class="rating"><i class="fas fa-star"></i> {{ movie.rating }} </p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+     {% else %}
+    <section class="featured">
+    <h3>Featured Movies</h3>
+    <div class="movie-grid">
+        <!-- If no movies exist, show this message -->
+        <p class="no-movies">No movies added yet. Be the first to add one!</p>
+    </div>
+    </section>
+    {% endif %}
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MovieWeb App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

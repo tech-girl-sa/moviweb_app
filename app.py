@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
+from setuptools.installer import fetch_build_egg
 from werkzeug.exceptions import NotFound
 
 from datamanager.data_manager import SQLiteDataManager
@@ -16,7 +17,12 @@ data_manager = SQLiteDataManager(db_path, app)
 
 @app.route('/')
 def home():
-    return "Welcome to MovieWeb App!"
+    try:
+        featured = data_manager.get_user_movies(1)
+        featured = featured[:3]
+    except :
+        featured = []
+    return render_template('home.html', featured=featured)
 
 
 @app.route('/users')
