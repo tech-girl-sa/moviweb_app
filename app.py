@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
-from setuptools.installer import fetch_build_egg
 from werkzeug.exceptions import NotFound
 
 from datamanager.data_manager import SQLiteDataManager
@@ -72,6 +71,12 @@ def edit_movie(user_id, movie_id):
 
 @app.route('/users/<int:user_id>/add_movie', methods=["GET","POST"])
 def add_movie(user_id):
+    """
+    There are two modes to add a movie:
+    1- automatic mode: retrieve the movie info from OmdbApi require only movie title to be entered.
+    It's the default mode but if the film doesn't exist in the api the user can access the manual mode.
+    2-manual mode: user needs to enter all details related to the movie manually.
+    """
     if request.method == "GET":
         manual_entry = request.args.get("manual_entry", "").lower() == "true"
         show_modal = request.args.get("show_modal", "").lower() == "true"

@@ -49,7 +49,6 @@ class SQLiteDataManager(DataManagerInterface):
         for key, value in update_data.items():
             if hasattr(movie, key):
                 setattr(movie, key, value)
-        print(movie)
         self.db.session.commit()
 
 

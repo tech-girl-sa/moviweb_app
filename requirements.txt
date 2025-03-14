@@ -6,3 +6,4 @@ dotenv
 requests
 pycountry
 emoji-country-flag
+pytest
