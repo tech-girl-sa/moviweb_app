@@ -1,0 +1,43 @@
+.error-container {
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-size: 6rem;
+    color: #d32f2f; /* Error-themed color */
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.error-icon {
+    font-size: 4rem;
+    color: #d32f2f;
+    margin-bottom: 20px;
+}
+
+.home-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ff9800;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    gap: 8px;
+}
+
+.home-button:hover {
+    background-color: #e68900;
+}
+
+.home-button i {
+    color: white;
+}

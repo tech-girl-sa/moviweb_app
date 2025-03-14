@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.exceptions import NotFound
 
 from datamanager.data_manager import SQLiteDataManager
 from datamanager.data_models import User, Movie
@@ -27,9 +28,13 @@ def list_users():
 @app.route('/users/<int:user_id>')
 def user_movies(user_id):
     message = request.args.get("message")
-    movies = data_manager.get_user_movies(user_id)
-    user = data_manager.get_user(user_id)
-    return render_template('user_movies.html', movies=movies, user=user, message=message)
+    try:
+        movies = data_manager.get_user_movies(user_id)
+        user = data_manager.get_user(user_id)
+    except:
+        raise NotFound()
+    return render_template('user_movies.html',
+                           movies=movies, user=user, message=message)
 
 
 @app.route('/add_user', methods=["GET","POST"])
@@ -44,9 +49,12 @@ def add_user():
         return redirect(url_for("user_movies", user_id=user.id, message=message))
 
 
-@app.route('/users/<user_id>/update_movie/<movie_id>', methods=["GET","POST"])
+@app.route('/users/<int:user_id>/update_movie/<int:movie_id>', methods=["GET","POST"])
 def edit_movie(user_id, movie_id):
-    movie = data_manager.get_movie(movie_id)
+    try:
+        movie = data_manager.get_movie(movie_id)
+    except:
+        raise NotFound()
     if request.method == "GET":
         return render_template('edit_movie.html', movie=movie)
     else:
@@ -56,7 +64,7 @@ def edit_movie(user_id, movie_id):
         return redirect(url_for("user_movies", user_id=user_id, message=message))
 
 
-@app.route('/users/<user_id>/add_movie', methods=["GET","POST"])
+@app.route('/users/<int:user_id>/add_movie', methods=["GET","POST"])
 def add_movie(user_id):
     if request.method == "GET":
         manual_entry = request.args.get("manual_entry", "").lower() == "true"
@@ -65,7 +73,8 @@ def add_movie(user_id):
             return render_template('add_movie.html', show_modal=True, user_id=user_id,
                                    manual_entry=manual_entry)
         else:
-            return render_template('add_movie.html', user_id=user_id, manual_entry=manual_entry)
+            return render_template('add_movie.html',
+                                   user_id=user_id, manual_entry=manual_entry)
     else:
         data = dict(request.form)
         if len(data) == 1:
@@ -82,13 +91,25 @@ def add_movie(user_id):
         message = f"Movie {movie.name} successfully added!"
         return redirect(url_for("user_movies", user_id=user_id, message=message))
 
-@app.route('/users/<user_id>/delete_movie/<movie_id>', methods=["GET"])
+
+@app.route('/users/<int:user_id>/delete_movie/<int:movie_id>', methods=["GET"])
 def delete_movie(user_id, movie_id):
-    movie = data_manager.get_movie(movie_id)
-    movie_name = movie.name
-    data_manager.delete_movie(movie_id)
+    try:
+        movie = data_manager.get_movie(movie_id)
+        movie_name = movie.name
+        data_manager.delete_movie(movie_id)
+    except:
+        raise NotFound()
     message=f"Movie {movie_name} successfully deleted!"
     return redirect(url_for("user_movies", user_id=user_id, message=message))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 
 if __name__=="__main__":
